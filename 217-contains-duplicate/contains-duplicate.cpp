@@ -1,12 +1,19 @@
 class Solution {
 public:
     bool containsDuplicate(vector<int>& nums) {
-        int n= nums.size();
-        unordered_set<int>duplicate;
-        for(int i=0;i<n;i++)
-        {
+
+// A Small Optimization
+// Our current approach works perfectly, but it always processes the entire array before making a decision.
+       unordered_set<int> duplicate;
+        
+        for(int i = 0; i < nums.size(); i++)
+         {
+            if (duplicate.count(nums[i]))
+            { 
+                return true;
+            }
             duplicate.insert(nums[i]);
         }
-        return duplicate.size()!= n ? true:false;
+        return false;
     }
 };
