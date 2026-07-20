@@ -4,6 +4,11 @@ public:
         int n = s.length();
         int m = t.length();
 
+        if(n!=m)
+        {
+            return false;
+        }
+
         int freq[26] = {0};
         for(char ch:s)
         {
