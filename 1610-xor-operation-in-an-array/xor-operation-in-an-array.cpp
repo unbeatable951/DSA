@@ -6,10 +6,7 @@ public:
         for(int i=0;i<n;i++)
         {
             nums.push_back(start + 2*i);
-        }
-        for(int i=0;i<n;i++)
-        {
-            result^=nums[i];
+             result^=nums[i];
         }
 
         return result;
