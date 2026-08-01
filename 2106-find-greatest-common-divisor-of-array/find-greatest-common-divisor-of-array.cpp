@@ -1,22 +1,39 @@
 class Solution {
 public:
+    // Function to find GCD using Euclidean Algorithm
+    int gcd(int a, int b)
+    {
+        while(b != 0)
+        {
+            int remainder = a % b;
+            a = b;
+            b = remainder;
+        }
 
- int gcd(int m,int n)
- {
-    if(m==0)
-    {
-        return n;
+        return a;
     }
-    else
-    {
-        return gcd(n%m,m);
-    }
- }
-    int findGCD(vector<int>& nums) 
-    {
-        int maxi=*max_element(nums.begin(),nums.end());
-        int mini = *min_element(nums.begin(),nums.end());
 
-        return gcd(maxi,mini);
+    int findGCD(vector<int>& nums)
+    {
+        // Step 1: Assume first element is both minimum and maximum
+        int mini = nums[0];
+        int maxi = nums[0];
+
+        // Step 2: Traverse the array to find minimum and maximum
+        for(int i = 1; i < nums.size(); i++)
+        {
+            if(nums[i] < mini)
+            {
+                mini = nums[i];
+            }
+
+            if(nums[i] > maxi)
+            {
+                maxi = nums[i];
+            }
+        }
+
+        // Step 3: Return GCD of minimum and maximum
+        return gcd(mini, maxi);
     }
 };
