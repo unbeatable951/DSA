@@ -15,19 +15,16 @@ public:
                 {
                     return false;
                 }
-                if(ch==')' && st.top()!='(')
+                char top =st.top();
+
+                if((ch==')' && top =='(') || (ch=='}' && top =='{') || (ch==']' && top =='[') )
+                {
+                    st.pop();
+                }
+                else
                 {
                     return false;
                 }
-                if(ch==']' && st.top()!='[')
-                {
-                    return false;
-                }
-                if(ch=='}' && st.top()!='{')
-                {
-                    return false;
-                }
-                st.pop();
             }
         }
 
