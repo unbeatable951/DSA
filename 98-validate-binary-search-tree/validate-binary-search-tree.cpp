@@ -11,28 +11,32 @@
  */
 class Solution {
 public:
-    long long prev = LLONG_MIN;
 
+    void inorder(TreeNode* root,vector<int>&res)
+    {
+        if(root==nullptr)
+        {
+            return;
+        }
+        inorder(root->left,res);
+        res.push_back(root->val);
+        inorder(root->right,res);
+    }
     bool isValidBST(TreeNode* root) {
+        vector<int>node;
+        inorder(root,node);
 
-        if (root == nullptr) {
-            return true;
+        int n = node.size();
+
+        for(size_t i=1;i<n;i++)
+        {
+            if(node[i]<=node[i-1])
+            {
+                return false;
+            }
         }
 
-        // Go to left subtree
-        if (!isValidBST(root->left)) {
-            return false;
-        }
-
-        // Check current node
-        if (root->val <= prev) {
-            return false;
-        }
-
-        // Update previous value
-        prev = root->val;
-
-        // Go to right subtree
-        return isValidBST(root->right);
+        return true;
+        
     }
 };
