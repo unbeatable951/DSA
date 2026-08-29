@@ -12,35 +12,43 @@
 class Solution {
 public:
 
-    int countNodes(TreeNode* root) {
-
-        if (root == nullptr) {
-            return 0;
-        }
-
-        int leftHeight = getHeight(root->left);
-        int rightHeight = getHeight(root->right);
-
-        if (leftHeight == rightHeight) {
-
-            return (1 << leftHeight) + countNodes(root->right);
-        }
-
-        else {
-
-            return (1 << rightHeight) + countNodes(root->left);
-        }
-    }
-
-    int getHeight(TreeNode* root) {
-
-        int height = 0;
+    int leftHeight(TreeNode* root) {
+        int h = 0;
 
         while (root != nullptr) {
-            height++;
+            h++;
             root = root->left;
         }
 
-        return height;
+        return h;
+    }
+
+    int rightHeight(TreeNode* root) {
+        int h = 0;
+
+        while (root != nullptr) {
+            h++;
+            root = root->right;
+        }
+
+        return h;
+    }
+
+    int countNodes(TreeNode* root) {
+
+        if (root == nullptr)
+            return 0;
+
+        int lh = leftHeight(root);
+        int rh = rightHeight(root);
+
+        // Perfect binary tree
+        if (lh == rh) {
+            return (1 << lh) - 1;
+        }
+
+        // Not perfect
+        return 1 + countNodes(root->left)
+                 + countNodes(root->right);
     }
 };
