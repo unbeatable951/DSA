@@ -10,30 +10,21 @@
  * };
  */
 class Solution {
-public:
+    int dia = 0;
 
-    int height(TreeNode* root, int& diameter) {
+    int height(TreeNode* root) {
+        if (root == NULL) return 0;
 
-        if (root == nullptr) {
-            return 0;
-        }
+        int lh = height(root->left);
+        int rh = height(root->right);
 
-        int leftHeight = height(root->left, diameter);
-        int rightHeight = height(root->right, diameter);
-
-        // Diameter passing through current node
-        diameter = max(diameter, leftHeight + rightHeight);
-
-        // Return height to parent
-        return 1 + max(leftHeight, rightHeight);
+        dia = max(dia, lh + rh);
+        return 1 + max(lh, rh);
     }
 
+public:
     int diameterOfBinaryTree(TreeNode* root) {
-
-        int diameter = 0;
-
-        height(root, diameter);
-
-        return diameter;
+        height(root);
+        return dia;
     }
 };
