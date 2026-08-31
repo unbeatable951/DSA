@@ -12,37 +12,31 @@
 class Solution {
 public:
 
-    int height(TreeNode* root) {
-
-        if (root == nullptr) {
+    int height(TreeNode* root)
+    {
+        if(root==nullptr)
+        {
             return 0;
         }
 
-        int leftHeight = height(root->left);
+        int left = height(root->left);
+        int right = height(root->right);
 
-        // Left subtree is not balanced
-        if (leftHeight == -1) {
-            return -1;
-        }
-
-        int rightHeight = height(root->right);
-
-        // Right subtree is not balanced
-        if (rightHeight == -1) {
-            return -1;
-        }
-
-        // Current node is not balanced
-        if (abs(leftHeight - rightHeight) > 1) {
-            return -1;
-        }
-
-        // Return height
-        return 1 + max(leftHeight, rightHeight);
+        return 1+max(left,right);
     }
-
     bool isBalanced(TreeNode* root) {
+        if(root==nullptr)
+        {
+            return true;
+        }
+        int left = height(root->left);
+        int right = height(root->right);
 
-        return height(root) != -1;
+        if(abs(left-right)>1)
+        {
+            return false;
+        }
+
+        return isBalanced(root->left) && isBalanced(root->right);  
     }
 };
